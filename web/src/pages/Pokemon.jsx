@@ -1,11 +1,11 @@
 import React from "react";
 
-function Item() {
+function Pokemon() {
   return (
     <div>
-      <h1>Item</h1>
+      <h1>Pokemon</h1>
     </div>
   );
 }
 
-export default Item;
+export default Pokemon;

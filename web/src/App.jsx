@@ -4,8 +4,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-import AllItems from './pages/AllItems';
-import Item from './pages/Item';
+import AllPokemon from './pages/AllPokemon';
+import Pokemon from './pages/Pokemon';
 
 
 
@@ -17,9 +17,9 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/items" />} />
-        <Route path="/items" element={<AllItems />} />
-        <Route path="/items/:id" element={<Item />} />
+        <Route path="/" element={<Navigate to="/pokemons" />} />
+        <Route path="/pokemons" element={<AllPokemon />} />
+        <Route path="/pokemons/:id" element={<Pokemon />} />
       </Routes>
 
       <Footer />
