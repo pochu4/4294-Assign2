@@ -3,8 +3,11 @@ import React from "react";
 function Footer() {
 
     return (
-        <div className='bg-blue-500 text-white p-4'>
-            <h1>FOOTER</h1>
+        <div className='bg-gray-500 text-white'>
+            <div className="w-10/12 flex justify-between mx-auto p-4">
+                <p>MDIA 4294 Assignment 2</p>
+                <p>Johann Chua - A01174894</p>
+            </div>
         </div>
     );
 
