@@ -112,7 +112,7 @@ function ModalContent({ onClose, onPokemonAdded }) {
                         Add Pokemon
                     </button> */}
 
-                    <button className="relative h-12 overflow-hidden rounded bg-emerald-500 px-5 py-2.5 text-white transition-all duration-300 hover:bg-emerald-500 hover:ring-2 hover:ring-emerald-500 hover:ring-offset-2" type='submit'><span class="relative">Add Pokemon</span></button>
+                    <button className="relative h-12 overflow-hidden rounded bg-emerald-500 px-5 py-2.5 text-white transition-all duration-300 hover:bg-emerald-500 hover:ring-2 hover:ring-emerald-500 hover:ring-offset-2" type='submit'><span className="relative">Add Pokemon</span></button>
 
                 </form>
 

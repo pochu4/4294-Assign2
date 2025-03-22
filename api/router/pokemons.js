@@ -6,11 +6,25 @@ const upload = require('../storage');
 // All Pokemons
 pokemonsRouter.get('/', (req, res) => {
 
+    console.log(req.query);
+
+    const types = req.query.types;
+
     const sql = `
     SELECT pokemons.*, types.name as type_name
     FROM pokemons
     JOIN types ON pokemons.type_id = types.id
     `;
+
+    // 1:22:13
+    // const queryParams = [];
+
+    // if(types) {
+
+    //     sql += ` WHERE types.id IN (?)`
+    //     queryParams.push(...types);
+
+    // } 
 
     connection.query(sql, (err, results) => {
         if (err) {

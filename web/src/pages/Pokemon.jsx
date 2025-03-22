@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useParams, useNavigate } from "react-router-dom"; 
 
 function Pokemon() {
   const { id } = useParams();
@@ -33,7 +33,7 @@ function Pokemon() {
     <div className="p-8 w-8/12 mx-auto bg-white shadow-lg rounded-lg">
       {/* Back Button */}
       <button
-        onClick={() => navigate(-1)} // Navigate back to the previous page
+        onClick={() => navigate(-1)} 
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
       >
         Back

@@ -5,6 +5,8 @@ import AddModal from "../components/AddModal";
 import UpdateModal from "../components/UpdateModal";
 import g from '../global.module.css';
 
+import Filter from "../components/Filter";
+
 function AllPokemon() {
 
     const [pokemons, setPokemons] = useState([]);
@@ -31,6 +33,8 @@ function AllPokemon() {
                 <AddModal onPokemonAdded={getAllPokemons} />
 
                 <h1 className="text-xl font-bold my-4 mt-10">Filter:</h1>
+
+                <Filter />
 
                 {/* Filter Stuff */}
                 {/* <p className="text-gray-600">Filter options will go here.</p> */}
