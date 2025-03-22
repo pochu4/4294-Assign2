@@ -36,7 +36,7 @@ function ModalContent({ onClose, onPokemonAdded }) {
         // console.log(types, name)
 
         const formData = new FormData();
-        
+
         formData.append("name", name);
         formData.append("type_id", types);
         formData.append("image", image);
@@ -97,6 +97,7 @@ function ModalContent({ onClose, onPokemonAdded }) {
                         onChange={(event) => setDescription(event.target.value)}
                         required
                     />
+
                     <label htmlFor="image">Image:</label>
                     <input
                         type="file"
@@ -107,9 +108,11 @@ function ModalContent({ onClose, onPokemonAdded }) {
                         required
                     />
 
-                    <button type="submit" className={g["button"]}>
+                    {/* <button type="submit" className={g["button"]}>
                         Add Pokemon
-                    </button>
+                    </button> */}
+
+                    <button className="relative h-12 overflow-hidden rounded bg-emerald-500 px-5 py-2.5 text-white transition-all duration-300 hover:bg-emerald-500 hover:ring-2 hover:ring-emerald-500 hover:ring-offset-2" type='submit'><span class="relative">Add Pokemon</span></button>
 
                 </form>
 

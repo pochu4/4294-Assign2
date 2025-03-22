@@ -89,10 +89,13 @@ function UpdateModalContent({ onClose, pokemon, onPokemonUpdated }) {
                     </div>
 
                     <div className={g['col-12']}>
-                        <button className={`${g['button']} ${g['success']}`} type="submit">Save</button>
+                        {/* <button className={`${g['button']} ${g['success']}`} type="submit">Save</button> */}
+                        <button className="relative h-12 overflow-hidden rounded bg-emerald-500 px-5 py-2.5 text-white transition-all duration-300 hover:bg-emerald-500 hover:ring-2 hover:ring-emerald-500 hover:ring-offset-2" type="submit"><span class="relative">Save</span></button>
                     </div>
                 </form>
                 <button className={m["modal__close-button"]} onClick={onClose}>x</button>
+
+                
             </div>
 
         </div>
