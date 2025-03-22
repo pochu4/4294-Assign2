@@ -1,18 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {Link} from "react-router";
+import AddModal from "../components/AddModal";
+import UpdateModal from "../components/UpdateModal";
+import g from '../global.module.css';
 
 function AllPokemon() {
 
     const [pokemons, setPokemons] = useState([]);
 
-    useEffect(() => {
-
+    const getAllPokemons = function () {
         fetch("http://localhost:3000/pokemons")
-            .then((res) => res.json())
-            .then((jsonData) => {
-                setPokemons(jsonData);
-                console.log(jsonData);
-            });
+        .then((res) => res.json())
+        .then((jsonData) => {
+            setPokemons(jsonData);
+            console.log(jsonData);
+        });
+    }
+
+    useEffect(() => {
+        getAllPokemons();
     }, []);
 
 
@@ -24,7 +31,8 @@ function AllPokemon() {
                 <h1 className="text-3xl font-bold mb-4">Filter:</h1>
 
                 {/* Filter Stuff */}
-                <p className="text-gray-600">Filter options will go here.</p>
+                {/* <p className="text-gray-600">Filter options will go here.</p> */}
+                <AddModal onPokemonAdded={getAllPokemons}/>
 
             </div>
 
@@ -43,6 +51,11 @@ function AllPokemon() {
                         <div>
                             <h2 className="text-xl font-bold text-center text-gray-800">{pokemon.name}</h2>
                             <p className="text-md text-center text-gray-600 mt-2">{pokemon.type_name}</p>
+                        </div>
+
+                        <div>
+                            <Link to={`/pokemons/${pokemon.id}`} className={`${g["button"]} ${g["small"]} ${g["primary"]} mt-4`}>View</Link>
+                            <UpdateModal onPokemonUpdated={getAllPokemons} pokemon={pokemon} />
                         </div>
 
                     </div>
