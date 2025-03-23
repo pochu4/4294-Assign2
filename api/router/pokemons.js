@@ -6,27 +6,29 @@ const upload = require('../storage');
 // All Pokemons
 pokemonsRouter.get('/', (req, res) => {
 
-    console.log(req.query);
-
     const types = req.query.types;
 
-    const sql = `
+    let sql = `
     SELECT pokemons.*, types.name as type_name
     FROM pokemons
     JOIN types ON pokemons.type_id = types.id
     `;
 
     // 1:22:13
-    // const queryParams = [];
+    const queryParams = [];
 
-    // if(types) {
+    if (types) {
 
-    //     sql += ` WHERE types.id IN (?)`
-    //     queryParams.push(...types);
+        sql += ` WHERE types.id IN (?)`
 
-    // } 
+        if (Array.isArray(types)) {
+            queryParams.push(...types);
+        } else {
+            queryParams.push(types)
+        }
+    }
 
-    connection.query(sql, (err, results) => {
+    connection.query(sql, [queryParams], (err, results) => {
         if (err) {
             res.status(500).send(err);
             return;
@@ -48,6 +50,7 @@ pokemonsRouter.get('/:id', (req, res) => {
         WHERE pokemons.id = ?
         `;
 
+
     connection.query(sql, [id], (err, results) => {
         if (err) {
             res.status(500).send(err);
@@ -57,6 +60,26 @@ pokemonsRouter.get('/:id', (req, res) => {
     });
 });
 
+// Delete Pokemon
+
+pokemonsRouter.delete("/:id", (req, res) => {
+
+    const id = req.params.id;
+    const sql = `DELETE FROM pokemons WHERE id = ? LIMIT 1`
+
+    connection.query(sql, [id], (err, results) => {
+
+        if(err) {
+            console.log(err); 
+            res.status(500).send("Interal Server Error");
+          }
+      
+          res.json({message: "Pokemon Deleted"});
+
+    })
+
+})
+
 
 
 
@@ -64,7 +87,7 @@ pokemonsRouter.get('/:id', (req, res) => {
 pokemonsRouter.put("/:id", upload.single("image"), (req, res) => {
 
     const { id } = req.params;
-    
+
     const { type_id, name, description } = req.body;
 
     let updatePokemonSQL = `
@@ -72,7 +95,7 @@ pokemonsRouter.put("/:id", upload.single("image"), (req, res) => {
 
     const queryParams = [type_id, name, description];
 
-    if(req.file) {
+    if (req.file) {
         updatePokemonSQL += `, image_name = ?`;
         queryParams.push(req.file.filename);
     }
@@ -81,15 +104,15 @@ pokemonsRouter.put("/:id", upload.single("image"), (req, res) => {
     queryParams.push(id);
 
     connection.query(updatePokemonSQL, queryParams, (err, results) => {
-            
-            if (err) {
-                console.log(err);
-                return res.status(500).send("An Error Occured");
-            }
-    
-            res.status(200).json({ message: "Pokemon Updated!" });
-    
-        });
+
+        if (err) {
+            console.log(err);
+            return res.status(500).send("An Error Occured");
+        }
+
+        res.status(200).json({ message: "Pokemon Updated!" });
+
+    });
 });
 
 

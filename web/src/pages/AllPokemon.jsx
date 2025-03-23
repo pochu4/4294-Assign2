@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import AddModal from "../components/AddModal";
 import UpdateModal from "../components/UpdateModal";
+import DeleteModal from "../components/DeleteModal";
 import g from '../global.module.css';
 
 import Filter from "../components/Filter";
@@ -20,6 +21,12 @@ function AllPokemon() {
             });
     }
 
+    // Handling Updated Pokemons
+    const handleUpdatedPokemons = (pokemonsArray) => {
+        console.log("Filtered Pokemons:", pokemonsArray);
+        setPokemons(pokemonsArray);
+    }
+
     useEffect(() => {
         getAllPokemons();
     }, []);
@@ -34,7 +41,7 @@ function AllPokemon() {
 
                 <h1 className="text-xl font-bold my-4 mt-10">Filter:</h1>
 
-                <Filter />
+                <Filter updatePokemons={handleUpdatedPokemons} />
 
                 {/* Filter Stuff */}
                 {/* <p className="text-gray-600">Filter options will go here.</p> */}
@@ -42,7 +49,7 @@ function AllPokemon() {
 
             </div>
 
-            {/* Pokemon Grid */}
+            { /* Pokemon Grid */}
             <div className="grid grid-cols-3 gap-6 w-3/4">
                 {pokemons.map((pokemon) => (
                     <div
@@ -61,14 +68,15 @@ function AllPokemon() {
 
                         <div className="flex justify-between w-full">
                             <Link to={`/pokemons/${pokemon.id}`} className={`${g["button"]} ${g["small"]} ${g["primary"]} mt-4`}>View</Link>
-                            {/* <Link to={`/pokemons/${pokemon.id}`} className="relative h-12 overflow-hidden rounded bg-blue-500 px-5 py-2.5 text-white transition-all duration-300 hover:bg-blue-500 hover:ring-2 hover:ring-blue-500 hover:ring-offset-2 text-center">View</Link> */}
                             <UpdateModal onPokemonUpdated={getAllPokemons} pokemon={pokemon} />
+                            <DeleteModal onPokemonDeleted={getAllPokemons} pokemon={pokemon} />
 
                         </div>
 
                     </div>
                 ))}
             </div>
+
         </div>
     );
 

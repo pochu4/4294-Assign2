@@ -2,7 +2,7 @@ import {  useState, useEffect } from "react";
 
 import g from "../global.module.css";
 
-function Filter() {
+function Filter( { updatePokemons } ) {
 
     const [types, setTypes] = useState([]);
 
@@ -26,12 +26,10 @@ function Filter() {
         const queryStringArray = selectedTypes.map( (id) => `types=${id}`);
         const queryString = queryStringArray.join("&")
 
-        console.log(queryString);
-
-        fetch(`http://localhost:3000/types?${queryString}`)
+        fetch(`http://localhost:3000/pokemons?${queryString}`)
         .then( (res) => res.json()  )
         .then( (data) => {
-            console.log(data);
+            updatePokemons(data);
         })
 
     }
