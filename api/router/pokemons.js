@@ -3,10 +3,23 @@ const pokemonsRouter = express.Router();
 const connection = require('../db');
 const upload = require('../storage');
 
+
+// couldnt figure out how to do authenticated views :/ 
+
+// const authenticateToken = require('../auth.jwt');
+
+// // Create new router
+// pokemonsRouter.use(authenticateToken)
+
 // All Pokemons
 pokemonsRouter.get('/', (req, res) => {
 
+    console.log(req.user);
+
     const types = req.query.types;
+
+    // :(
+    // const userId = req.user.userId;
 
     let sql = `
     SELECT pokemons.*, types.name as type_name
@@ -26,7 +39,17 @@ pokemonsRouter.get('/', (req, res) => {
         } else {
             queryParams.push(types)
         }
-    }
+    } 
+    
+    
+    // else {
+
+    //     sql += ` WHERE `;
+
+    // }
+
+    // sql += ` pokemons.user_id = ?`;
+    // queryParams.push(user_id);
 
     connection.query(sql, [queryParams], (err, results) => {
         if (err) {
@@ -123,7 +146,11 @@ pokemonsRouter.put("/:id", upload.single("image"), (req, res) => {
 // Add Pokemon
 pokemonsRouter.post("/", upload.single("image"), (req, res) => {
 
+    // Get type id and title from req body
     const { type_id, name, description } = req.body;
+
+    const user_id = req.user.userId;
+
     const image_name = req.file.filename;
 
     // console.log("name: ", name);
@@ -132,9 +159,9 @@ pokemonsRouter.post("/", upload.single("image"), (req, res) => {
     // console.log("description: ", description);
 
     const addPokemonSQL = `
-    INSERT INTO pokemons (name, type_id, image_name, description) VALUES (?, ?, ?, ?)`;
+    INSERT INTO pokemons (name, type_id, image_name, description, user_id) VALUES (?, ?, ?, ?, ?)`;
 
-    connection.query(addPokemonSQL, [name, type_id, image_name, description], (err, results) => {
+    connection.query(addPokemonSQL, [name, type_id, image_name, description, user_id], (err, results) => {
 
         if (err) {
             console.log(err);

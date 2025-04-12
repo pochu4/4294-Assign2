@@ -14,9 +14,16 @@ function ModalContent({ onClose, onPokemonAdded }) {
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
 
-    useEffect(() => {
 
-        fetch("http://localhost:3000/types")
+    useEffect(() => {
+        // const token = localStorage.getItem("token");
+
+        fetch("http://localhost:3000/types") 
+        // {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //       },
+        // }
             .then((res) => res.json())
             .then((jsonData) => {
                 setDbTypes(jsonData);
@@ -29,11 +36,10 @@ function ModalContent({ onClose, onPokemonAdded }) {
 
     }, []);
 
+
     const handleFormSubmit = async (event) => {
 
         event.preventDefault();
-
-        // console.log(types, name)
 
         const formData = new FormData();
 
@@ -45,6 +51,10 @@ function ModalContent({ onClose, onPokemonAdded }) {
         const APIRequest = await fetch("http://localhost:3000/pokemons", {
             method: "POST",
             body: formData,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt-token")}`,
+                // "Content-Type": "application/json",
+            },
         });
 
 

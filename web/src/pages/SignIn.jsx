@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import g from '../global.module.css';
 import bannerImage from '../assets/images/home-bg.png';
 
-function SignIn( ) {
+function SignIn( {handleLogin} ) {
 
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [formData, setFormData] = useState({
@@ -29,8 +29,9 @@ function SignIn( ) {
         })
         .then( response => response.json() )
         .then( returnedData => {
-            localStorage.setItem( "jwt-token", returnedData.token);
+            localStorage.setItem( "jwt-token", returnedData.jwt);
             setLoginSuccess(true);
+            handleLogin();
         });
 
     };

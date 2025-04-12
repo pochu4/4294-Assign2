@@ -13,7 +13,12 @@ function AllPokemon() {
     const [pokemons, setPokemons] = useState([]);
 
     const getAllPokemons = function () {
-        fetch("http://localhost:3000/pokemons")
+        fetch("http://localhost:3000/pokemons", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt-token")}`,
+                "Content-Type": "application/json",
+            },
+        })
             .then((res) => res.json())
             .then((jsonData) => {
                 setPokemons(jsonData);
@@ -51,7 +56,7 @@ function AllPokemon() {
 
             { /* Pokemon Grid */}
             <div className="grid grid-cols-3 gap-6 w-3/4">
-                {pokemons.map((pokemon) => (
+                {Array.isArray(pokemons) && pokemons.map((pokemon) => (
                     <div
                         key={pokemon.id}
                         className="shadow-2xl rounded-xlg p-4 flex flex-col items-center hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-96"
