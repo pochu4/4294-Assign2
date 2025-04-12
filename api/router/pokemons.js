@@ -5,6 +5,7 @@ const upload = require('../storage');
 
 
 // couldnt figure out how to do authenticated views :/ 
+// ~1:40:00
 
 // const authenticateToken = require('../auth.jwt');
 
