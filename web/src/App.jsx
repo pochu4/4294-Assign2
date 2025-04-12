@@ -6,6 +6,9 @@ import Footer from './components/Footer';
 
 import AllPokemon from './pages/AllPokemon';
 import Pokemon from './pages/Pokemon';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 
 
@@ -17,7 +20,9 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/pokemons" />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
         <Route path="/pokemons" element={<AllPokemon />} />
         <Route path="/pokemons/:id" element={<Pokemon />} />
       </Routes>

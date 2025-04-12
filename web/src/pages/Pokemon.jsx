@@ -30,7 +30,7 @@ function Pokemon() {
   }
 
   return (
-    <div className="p-8 w-8/12 mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-8 w-8/12 mx-auto bg-white shadow-lg rounded-lg mt-24">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)} 

@@ -34,12 +34,12 @@ function AllPokemon() {
 
 
     return (
-        <div className="p-8 w-10/12 mx-auto flex justify-between mb-20 gap-8">
+        <div className="p-8 w-10/12 mx-auto flex justify-between mb-20 gap-8 mt-24">
             <div className="">
 
                 <AddModal onPokemonAdded={getAllPokemons} />
 
-                <h1 className="text-xl font-bold my-4 mt-10">Filter:</h1>
+                <h1 className="text-xl my-4 mt-10">Filter:</h1>
 
                 <Filter updatePokemons={handleUpdatedPokemons} />
 
