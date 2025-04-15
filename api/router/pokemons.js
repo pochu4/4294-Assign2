@@ -28,7 +28,6 @@ pokemonsRouter.get('/', (req, res) => {
     JOIN types ON pokemons.type_id = types.id
     `;
 
-    // 1:22:13
     const queryParams = [];
 
     if (types) {
